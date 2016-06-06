@@ -1,13 +1,13 @@
-package com.carloslucero.novedadesjava8.behaviorparameterization.expresioneslambda;
+package com.carloslucero.novedadesjava8.behaviorparameterization.methodreferences;
 
-import com.carloslucero.novedadesjava8.behaviorparameterization.interfaces.IFiltro;
-
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.function.Predicate;
 
 /**
- * Created by carloslucero on 04/06/16.
+ * Created by carloslucero on 05/06/16.
  */
 public class Main {
     /**
@@ -63,24 +63,25 @@ public class Main {
         List<Persona> personas = crearPersonasList();
 
         // Creo un listado de personas filtrando unicamente las que pertenecen a la ciudad de Cuenca
-        List<Persona> personasDeCuenca = filtrar(personas, (Persona persona) -> persona.ciudad.compareTo("Cuenca") == 0);
+        List<Persona> personasDeCuenca = filtrar(personas, persona -> persona.ciudad.compareTo("Cuenca") == 0);
         imprimirLista("Personas de la ciudad de Cuenca", personasDeCuenca);
 
         // Creo un listado de personas filtrando unicamente las que sean mayores de edad
-        List<Persona> personasMayoresEdad = filtrar(personas, (Persona persona) -> persona.edad >= 18);
+        List<Persona> personasMayoresEdad = filtrar(personas, persona -> persona.edad >= 18);
         imprimirLista("Personas mayores de edad", personasMayoresEdad);
 
         // Creo un listado de personas filtrando unicamente las que pertenecen a Cuenca y que ademas sean Mayores de edad
-        List<Persona> personasCuencaMayoresEdad = filtrar(personas, (Persona persona) -> persona.ciudad.compareTo("Cuenca") == 0 && persona.edad > 18);
+        List<Persona> personasCuencaMayoresEdad = filtrar(personas, persona -> persona.ciudad.compareTo("Cuenca") == 0 && persona.edad > 18);
         imprimirLista("Personas de la ciudad de Cuenca y mayores de edad", personasCuencaMayoresEdad);
 
         // Creo un listado de personas filtrando unicamente las que su nombre contenga una d, pertenezcan a Cuenca y que ademas sean Mayores de edad
-        List<Persona> personasNombreDCuencaMayoresEdad = filtrar(personas, (Persona persona) -> persona.nombre.contains("d") && persona.ciudad.compareTo("Cuenca") == 0 && persona.edad > 18);
+        List<Persona> personasNombreDCuencaMayoresEdad = filtrar(personas, persona -> persona.nombre.contains("d") && persona.ciudad.compareTo("Cuenca") == 0 && persona.edad > 18);
         imprimirLista("Personas cuyo nombre contiene una 'd' que sean de la ciudad de Cuenca y ademas mayores de edad", personasNombreDCuencaMayoresEdad);
 
-        Predicate<Persona> mayorEdadLambdaA = (Persona persona) -> persona.edad >= 18;
-        IFiltro<Persona> mayorEdadLambdaB = (Persona persona) -> persona.edad >= 18;
 
-        // mayorEdadLambdA = mayorEdadLambdaB; // esta sentencia es invalida, los tipos son diferentes
+
+        List<String> strings = Arrays.asList("a", "b", "c", "d", "e");
+        strings.sort((str1, str2) -> str1.compareToIgnoreCase(str2));
+        strings.sort(String::compareToIgnoreCase);
     }
 }

@@ -35,7 +35,7 @@ public class Main {
     private static List<Persona> filtrar(List<Persona> listaOriginal, IFiltro filtroImpl){
         ArrayList<Persona> listaFiltrada = new ArrayList<Persona>();
         for(Persona persona : listaOriginal){
-            if(filtroImpl.filtrar(persona)){
+            if(filtroImpl.test(persona)){
                 listaFiltrada.add(persona);
             }
         }
@@ -61,7 +61,7 @@ public class Main {
 
         // Creo un listado de personas filtrando unicamente las que pertenecen a la ciudad de Cuenca
         List<Persona> personasDeCuenca = filtrar(personas, new IFiltro<Persona>() {
-            public Boolean filtrar(Persona entidad) { // Metodo utilizado para filtrar
+            public Boolean test(Persona entidad) { // Metodo utilizado para filtrar
                 return entidad.ciudad.compareTo("Cuenca") == 0; // Expresion que evalua si la persona es de Cuenca
             }
         });
@@ -69,7 +69,7 @@ public class Main {
 
         // Creo un listado de personas filtrando unicamente las que sean mayores de edad
         List<Persona> personasMayoresEdad = filtrar(personas, new IFiltro<Persona>() {
-            public Boolean filtrar(Persona entidad) { // Metodo utilizado para filtrar
+            public Boolean test(Persona entidad) { // Metodo utilizado para filtrar
                 return entidad.edad >= 18; // Expresion que evalua si la persona es mayor de edad
             }
         });
